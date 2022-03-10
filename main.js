@@ -9,5 +9,5 @@ Menu.init()
 // const Nobu = Restaurant.all[0]
 // Nobu.addMenu("Sea Food")
 
-console.log(Restaurant.all)
+console.log(Menu.all)
 

@@ -1,16 +1,33 @@
+const db = require('better-sqlite3')('./database.sqlite');
+
+
 class Item{
-    constructor(name,price){
+    static all = []
+
+    static init = function() {
+        db.prepare("CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY, menu_id INTEGER, name TEXT, price INTEGER);").run();
+    }
+
+    constructor(menu_id, name, price, id){
+        this.menu_id = menu_id
         this.name = name
         this.price = price
+
+        if (id){
+            // SQL -> Javascript
+            this.id = id
+        } else {
+            // Javascript -> SQL
+            const insert = db.prepare('INSERT INTO items (menu_id,name,price) VALUES (?,?,?);').run(this.menu_id,this.name,this.price);
+            this.id = insert.lastInsertRowid
+        }
+
+        Item.all.push(this)
     }
 
 }
 
 
-const potatos = new Item('potatos','£2.00')
-const pringles = new Item('pringles','£1.70')
-const curry = new Item('curry','£4.00')
-const margarita = new Item('margarita', '£16.99')
 
 
-module.exports = {Item,potatos,pringles,curry,margarita}
+module.exports = {Item}
