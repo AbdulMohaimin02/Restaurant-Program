@@ -10,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "better-sqlite3": "^7.5.0"
   }
 }
