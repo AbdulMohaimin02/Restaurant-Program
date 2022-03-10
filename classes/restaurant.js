@@ -10,7 +10,16 @@ class Restaurant{
 
         restaurants.forEach(restaurant => {
             const {id, name, imageUrl} = restaurant
-            new Restaurant(name,imageUrl,id)
+            const restaurantInstance = new Restaurant(name,imageUrl,id)
+            const menusRows = db.prepare('SELECT * FROM menus WHERE restaurant_id =?;').all(restaurantInstance.id)
+            // console.log(menusRows)
+
+            menusRows.forEach(menusRow =>  {
+                const {id, restaurant_id, title } = menusRow
+                // console.log(title)
+                const menuInstance = new Menu(restaurant_id,title,id)
+                restaurantInstance.restaurantMenus.push(menuInstance)
+            })
         })
 
 

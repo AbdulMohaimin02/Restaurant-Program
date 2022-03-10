@@ -16,7 +16,9 @@ class Menu{
         if (id) {
             this.id = id
         } else {
-            const insert = db.prepare('INSERT INTO menus (title, restaurant_id) VALUES (?,?);').run(this.title, this.restaurant_id)
+
+            console.log(this)
+            const insert = db.prepare('INSERT INTO menus (restaurant_id, title) VALUES (?,?);').run(this.restaurant_id, this.title)
             this.id = insert.lastInsertRowid
         }
 
