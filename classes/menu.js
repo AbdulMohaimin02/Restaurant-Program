@@ -1,4 +1,4 @@
-const {potatos,curry,margarita,pringles} = require('./item')
+const {Item} = require('./item')
 const db = require('better-sqlite3')('./database.sqlite');
 
 
@@ -35,8 +35,9 @@ class Menu{
         Menu.all.push(this)
     }
     
-    addItem(item,price){
-
+    addItem(menuName,itemName,price){
+        const item = new Item(this.id,itemName,price)
+        this.menuItems.push(item)
         
     }
 
