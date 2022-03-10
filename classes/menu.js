@@ -35,8 +35,7 @@ class Menu{
         Menu.all.push(this)
     }
     
-    addItem(menuName,itemName,price){
-        const item = new Item(this.id,itemName,price)
+    addItem(item){
         this.menuItems.push(item)
         
     }

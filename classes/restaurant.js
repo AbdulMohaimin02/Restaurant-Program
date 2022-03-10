@@ -70,8 +70,7 @@ class Restaurant{
     // This add menu function can be called from the outside to add a menu to a 
     // restaurant. By calling this function, you can simply pass in a string, this will then 
     // create a new instance of the Menu class and push it to the retaurant Menus array
-    addMenu(menuTitle){
-        const menu = new Menu(this.id, menuTitle)
+    addMenu(menu){
         this.restaurantMenus.push(menu)
     }
 
