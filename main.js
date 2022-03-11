@@ -19,7 +19,6 @@ const blackCod = new Item(landFood.id,'Black Cod', '£40.00')
 landFood.addItem(blackCod)
 
 
-
 console.log(util.inspect(Restaurant.all, {depth: Infinity,colors: true}))
 
 
