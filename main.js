@@ -4,10 +4,10 @@ const {Item} = require('./classes/item')
 
 const util = require('util')
 
-
-Restaurant.init()
-Menu.init()
 Item.init()
+Menu.init()
+Restaurant.init()
+
 
 
 // const Nobu = new Restaurant('Nobu','https://image.url')
@@ -19,7 +19,10 @@ Item.init()
 // landFood.addItem(blackCod)
 
 
+// console.log(Menu.all)
 console.log(util.inspect(Restaurant.all, {depth: Infinity,colors: true}))
+// console.log(Restaurant.all)
+// console.log(Item.all)
 
 
 

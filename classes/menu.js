@@ -16,17 +16,6 @@ class Menu{
         menus.forEach(menu => { 
             const {id, restaurant_id, title} = menu
             const menuInstance = new Menu(restaurant_id,title,id)
-            const itemRows = db.prepare('SELECT * FROM items WHERE menu_id = ?').all(menuInstance.id)
-
-            itemRows.forEach( itemRow => {
-                const {id, menu_id, name, price} = itemRow
-
-                const itemInstance = new Item(menu_id,name,price,id)
-
-                menuInstance.menuItems.push(itemInstance)
-
-            })
-
         })
 
     }
@@ -42,6 +31,18 @@ class Menu{
         if (id) {
             // SQL -> Javascript
             this.id = id
+            const itemRows = db.prepare('SELECT * FROM items WHERE menu_id = ?').all(this.id)
+
+            itemRows.forEach( itemRow => {
+                const {id, menu_id, name, price} = itemRow
+
+                const itemInstance = new Item(menu_id,name,price,id)
+
+                this.menuItems.push(itemInstance)
+                // console.log(menuInstance)
+            
+
+            })
         } else {
             // Javascript -> SQL
             const insert = db.prepare('INSERT INTO menus (restaurant_id, title) VALUES (?,?);').run(this.restaurant_id, this.title)
