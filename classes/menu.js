@@ -9,8 +9,6 @@ class Menu{
     // been made, we do this by pushing 'this' at the bottom of the Menu constructor
     static all = []
 
-    // In this init funciton we Create a menus table in the database if one does not 
-    // already exist 
     static init = function() {
         db.prepare("CREATE TABLE IF NOT EXISTS menus (id INTEGER PRIMARY KEY, restaurant_id INTEGER, title TEXT);").run();
         const menus = db. prepare('SELECT * FROM menus;').all()
@@ -48,7 +46,7 @@ class Menu{
             // Javascript -> SQL
             const insert = db.prepare('INSERT INTO menus (restaurant_id, title) VALUES (?,?);').run(this.restaurant_id, this.title)
             this.id = insert.lastInsertRowid
-            
+
         }
 
         Menu.all.push(this)
@@ -58,6 +56,8 @@ class Menu{
         this.menuItems.push(item)
     }
 
+    // Currently only works for removing object from the javascript array and not 
+    // the sql table 
     removeItem(item){
         const index = this.menuItems.indexOf(item)
         if (index > -1){

@@ -74,6 +74,9 @@ class Restaurant{
         this.restaurantMenus.push(menu)
     }
 
+
+    // Currently only works for removing object from the javascript array and not 
+    // the sql table 
     removeMenu(menu){
         const index = this.removeMenu.indexOf(menu)
         if (index > -1){
@@ -93,7 +96,7 @@ module.exports = {Restaurant}
 
 
 // *switch case parameter is my own term. It referes to an paramater that changes
-// the functionality of the function depending on weather it is passed in.
+// the functionality of the function depending on weather it is passed in or not passed in.
 
 // In the the current example if the id parameter is not passed in, we are converting
 // a JS object into SQL code, whereas if the id parameter is passed in, we are converting 
