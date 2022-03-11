@@ -13,7 +13,7 @@ class Restaurant{
         // We first write the SQL query to Create a new restaurants table, if one dosn't exist.
         // There for the first time the restaurant class is called a new restaurants table will be made
         // and every subsequnet time the sql query will be ignored
-        db.prepare('CREATE TABLE IF NOT EXISTS restaurants (id INTEGER PRIMARY KEY, name TEXT);').run()
+        db.prepare('CREATE TABLE IF NOT EXISTS restaurants (id INTEGER PRIMARY KEY, name TEXT,imageUrl TEXT);').run()
         // The below variable 'restaurants' holds a refrence to all the items in the restaurants table
         const restaurants = db. prepare('SELECT * FROM restaurants;').all()
 
@@ -60,7 +60,7 @@ class Restaurant{
             this.id = id
         } else {
             // Javascript -> SQL
-            const insert = db.prepare('INSERT INTO restaurants (name) VALUES (?);').run(this.name)
+            const insert = db.prepare('INSERT INTO restaurants (name,imageUrl) VALUES (?,?);').run(this.name,this.imageUrl)
             this.id = insert.lastInsertRowid
         }
 

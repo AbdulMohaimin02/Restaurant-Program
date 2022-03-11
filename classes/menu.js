@@ -13,6 +13,24 @@ class Menu{
     // already exist 
     static init = function() {
         db.prepare("CREATE TABLE IF NOT EXISTS menus (id INTEGER PRIMARY KEY, restaurant_id INTEGER, title TEXT);").run();
+        const menus = db. prepare('SELECT * FROM menus;').all()
+
+        menus.forEach(menu => { 
+            const {id, restaurant_id, title} = menu
+            const menuInstance = new Menu(restaurant_id,title,id)
+            const itemRows = db.prepare('SELECT * FROM items WHERE menu_id = ?').all(menuInstance.id)
+
+            itemRows.forEach( itemRow => {
+                const {id, menu_id, name, price} = itemRow
+
+                const itemInstance = new Item(menu_id,name,price,id)
+
+                menuInstance.menuItems.push(itemInstance)
+
+            })
+
+        })
+
     }
 
     // This constructor takes in the parameters restaurant_id(to identify which restaurant the menu belongs to)
@@ -30,6 +48,7 @@ class Menu{
             // Javascript -> SQL
             const insert = db.prepare('INSERT INTO menus (restaurant_id, title) VALUES (?,?);').run(this.restaurant_id, this.title)
             this.id = insert.lastInsertRowid
+            
         }
 
         Menu.all.push(this)
@@ -37,7 +56,6 @@ class Menu{
     
     addItem(item){
         this.menuItems.push(item)
-        
     }
 
     removeItem(item){
