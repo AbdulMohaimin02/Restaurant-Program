@@ -1,8 +1,8 @@
 {
-  "name": "restaraunt",
+  "name": "restaraunt-program",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "jest --watchAll"
   },
