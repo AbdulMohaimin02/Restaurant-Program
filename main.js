@@ -10,13 +10,13 @@ Menu.init()
 Item.init()
 
 
-const Nobu = new Restaurant('Nobu','https://image.url')
-new Menu(Nobu.id,'Land Food')
-Nobu.addMenu(landFood)
+// const Nobu = new Restaurant('Nobu','https://image.url')
+// const landFood = new Menu(Nobu.id,'Land Food')
+// Nobu.addMenu(landFood)
 
 
-const blackCod = new Item(landFood.id,'Black Cod', '£40.00')
-landFood.addItem(blackCod)
+// const blackCod = new Item(landFood.id,'Black Cod', '£40.00')
+// landFood.addItem(blackCod)
 
 
 console.log(util.inspect(Restaurant.all, {depth: Infinity,colors: true}))
