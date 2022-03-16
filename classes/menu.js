@@ -57,14 +57,24 @@ class Menu{
         this.menuItems.push(item)
     }
 
-    // Currently only works for removing object from the javascript array and not 
-    // the sql table 
-    removeItem(item){
-        const index = this.menuItems.indexOf(item)
-        if (index > -1){
-            this.menuItems.splice(index,1)
-        }
+    updateMenu(updates) {
+
+        this.title = updates.title || this.title
+        this.restaurant_id = updates.restaurant_id || this.restaurant_id
+        this.menuItems = updates.menuItems|| this.menuItems
+
+        const update = db.prepare('UPDATE menus SET restaurant_id =?, title =? WHERE id = ?;')
+        update.run(this.restaurant_id,this.title,this.id)
     }
+
+    
+    deleteMenu() {
+        db.prepare('DELETE FROM menus WHERE id=?;').run(this.id)
+        const index = Menu.all.indexOf(this)
+        Menu.all.splice(index, 1)
+    }
+
+
 
 }
 

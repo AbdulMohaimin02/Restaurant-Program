@@ -74,22 +74,6 @@ class Restaurant{
         this.restaurantMenus.push(menu)
     }
 
-
-    // Currently only works for removing object from the javascript array and not 
-    // the sql table 
-    removeMenu(menu){
-        const index = this.removeMenu.indexOf(menu)
-        if (index > -1){
-            this.restaurantMenus.splice(index,1)
-        }
-    }
-
-    showAllRestaurants(){
-        return db.prepare('SELECT * FROM restaurants').all()
-    }
-
-
-    
     // This function is used to update an entry in the restaurant table
     updateRestaurant(updates) {
         

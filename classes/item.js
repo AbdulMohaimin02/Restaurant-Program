@@ -25,6 +25,20 @@ class Item{
         Item.all.push(this)
     }
 
+
+    updateItem(updates) {
+        this.menu_id =  updates.menu_id || this.menu_id
+        this.name = updates.name || this.name
+        this.price = updates.price || this.price
+        
+        const update = db.prepare('UPDATE menus SET menu_id = ?, name = ?, price = ?')
+        update.run(this.menu_id,this.name,this.price)
+    }
+
+    deleteItem() {
+        db.prepare('DELETE FROM items WHERE id=?;').run(this.id)
+    }
+
 }
 
 
