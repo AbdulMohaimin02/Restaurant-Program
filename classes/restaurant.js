@@ -88,6 +88,31 @@ class Restaurant{
         return db.prepare('SELECT * FROM restaurants').all()
     }
 
+
+    
+    // This function is used to update an entry in the restaurant table
+    updateRestaurant(updates) {
+        
+        // The || operator is called the "logical or" operator, If the value to the 
+        // left is true the right one will be ignored and vice versa
+        this.name = updates.name || this.name
+        this.imageUrl = updates.imageUrl || this.imageUrl
+        this.restaurantMenus = updates.menus || this.restaurantMenus
+
+        // Then we run a database sql query to update the name and imageUrl enteries in the restaurant
+        const update = db.prepare('UPDATE restaurants SET name =?, imageUrl =? WHERE id = ?;')
+        // Since we updating the current instance of the restaurant, for the id all we need to pass in is this.id
+        update.run(this.name,this.imageUrl,this.id)
+    }
+
+
+    delete() {
+        db.prepare('DELETE FROM restaurants WHERE id=?;').run(this.id)
+        const index = Restaurant.all.indexOf(this)
+        Restaurant.all.splice(index, 1)
+    }
+
+
 }
 
 
