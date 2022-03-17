@@ -32,7 +32,7 @@ class Item{
         this.name = updates.name || this.name
         this.price = updates.price || this.price
         
-        const update = db.prepare('UPDATE menus SET menu_id = ?, name = ?, price = ?')
+        const update = db.prepare('UPDATE items SET menu_id = ?, name = ?, price = ?')
         update.run(this.menu_id,this.name,this.price)
     }
 
